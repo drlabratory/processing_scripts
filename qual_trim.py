@@ -57,7 +57,7 @@ filebases = []
 
 for filenames in file_list:
 	if not filenames[:9] in filebases:
-		filebases.append(filenames([:9]))
+		filebases.append(filenames[:9])
 
 for bases in filebases:
 	if bases+'_1.fastq.gz' in file_list:
