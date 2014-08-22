@@ -48,3 +48,14 @@ def trim_double(filebase, file1, file2):
 	else:
 		os.chdir("..'")
 		return False
+
+file_list = glob.glob('SR*gz')
+filebases = []
+
+for filenames in file_list:
+	if not filenames[:9] in filebases:
+		filebases.append(filenames([:9]))
+
+for bases in filebases:
+	if bases+'_1.fastq.gz' in file_list:
+		sys.w
