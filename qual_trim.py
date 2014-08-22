@@ -1,12 +1,14 @@
 #!/usr/bin/env python
+# Trim all files in the current directory using Trimmomatic
+# put trimmed reads in a new directory
+# File handling highly specific to EBI ENA / SRA naming convention
 
 import os
 import sys
 import subprocess
 import glob
 
-# Pass a filename base and either one or two files to Trimmomtatic
-# File handling highly specific to EBI ENA / SRA naming convention
+# Pass a filename base and either one or two files to Trimmomatic
 
 def trim_single(filebase, file1):
 	trim_directory = filebase+'_trim'
