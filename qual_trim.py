@@ -28,7 +28,7 @@ def trim_single(filebase, file1):
 		os.chdir("..")
 		return True
 	else:
-		os.chdir("..'")
+		os.chdir("..")
 		return False
 
 def trim_double(filebase, file1, file2):
@@ -49,7 +49,7 @@ def trim_double(filebase, file1, file2):
 		os.chdir("..")
 		return True
 	else:
-		os.chdir("..'")
+		os.chdir("..")
 		return False
 
 file_list = glob.glob('SR*gz')
