@@ -35,7 +35,7 @@ def trim_double(filebase, file1, file2):
 	trim_directory = filebase+'_trim'
 	trim_command = ("java -Xmx40g -jar "
 		"/share/Trimmomatic-0.32/trimmomatic-0.32.jar PE "
-		"-phred33 -threads 64 -baseout %s %s %s"
+		"-phred33 -threads 64 -baseout %s %s %s "
 		"ILLUMINACLIP:/share/Trimmomatic-0.32/barcodes.fa:2:40:15 "  
 		"LEADING:5 "
 		"TRAILING:5 "  
