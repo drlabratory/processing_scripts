@@ -37,7 +37,7 @@ def trim_any(filebase):
 		if not os.path.exists(trim_directory):
 			os.mkdir(trim_directory)
 		os.chdir(trim_directory)
-		sys.stdout.write("%s is paired end reads.\nTrimming for quality...\n" % filebase)
+		sys.stdout.write("%s is single end reads.\nTrimming for quality...\n" % filebase)
 		subprocess.call(single_command, shell=True)
 		sys.stdout.write("Trimming of %s completed." % filebase)
 		sys.stdout.flush()
@@ -47,7 +47,7 @@ def trim_any(filebase):
 		if not os.path.exists(trim_directory):
 			os.mkdir(trim_directory)
 		os.chdir(trim_directory)
-		sys.stdout.write("%s is single end reads.\nTrimming for quality...\n" % filebase)
+		sys.stdout.write("%s is double end reads.\nTrimming for quality...\n" % filebase)
 		subprocess.call(double_command, shell=True)
 		sys.stdout.write("Trimming of %s completed." % filebase)
 		sys.stdout.flush()
