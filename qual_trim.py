@@ -66,17 +66,23 @@ for bases in filebases:
 		sys.stdout.write("%s is paired end reads.\nTrimming for quality...\n" % bases)
 		if trim_double(bases, file1, file2):
 			sys.stdout.write("Trimming completed.")
+			sys.stdout.flush()
 		else:
 			sys.stdout.write("Trimming failed!")
+			sys.stdout.flush()
 	elif bases+'.fastq.gz' in file_list:
 		file1 = bases+'.fastq.gz'
 		sys.stdout.write("%s is single end reads.\nTrimming for quality...\n" % bases)
 		if trim_single(bases, file1):
 			sys.stdout.write("Trimming completed.")
+			sys.stdout.flush()
 		else:
 			sys.stdout.write("Trimming failed!")
+			sys.stdout.flush()
 	else:
 		sys.stdout.write("Check file names, non-standard, skipping %s" % bases)
+		sys.stdout.flush()
+
 		
 		
 		
