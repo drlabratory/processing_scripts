@@ -17,7 +17,7 @@ def trim_any(filebase):
 	file_2 = bases+'_2.fastq.gz'	
 	single_command = ("java -Xmx14g -jar "
 		"/share/Trimmomatic-0.32/trimmomatic-0.32.jar SE "
-		"-phred33 -threads 2 -baseout %s %s "
+		"-phred33 -threads 4 -baseout %s %s "
 		"ILLUMINACLIP:/share/Trimmomatic-0.32/barcodes.fa:2:40:15 "  
 		"LEADING:5 "
 		"TRAILING:5 "  
@@ -26,7 +26,7 @@ def trim_any(filebase):
 		) % (filebase, os.path.join("..",file_single))
 	double_command = ("java -Xmx14g -jar "
 		"/share/Trimmomatic-0.32/trimmomatic-0.32.jar PE "
-		"-phred33 -threads 2 -baseout %s %s %s "
+		"-phred33 -threads 4 -baseout %s %s %s "
 		"ILLUMINACLIP:/share/Trimmomatic-0.32/barcodes.fa:2:40:15 "  
 		"LEADING:5 "
 		"TRAILING:5 "  
