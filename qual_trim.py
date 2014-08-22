@@ -6,6 +6,7 @@ import subprocess
 import glob
 
 # Pass a filename base and either one or two files to Trimmomtatic
+# File handling highly specific to EBI ENA / SRA naming convention
 
 def trim_single(filebase, file1):
 	trim_directory = filebase+'_trim'
@@ -58,4 +59,22 @@ for filenames in file_list:
 
 for bases in filebases:
 	if bases+'_1.fastq.gz' in file_list:
-		sys.w
+		file1 = bases+'_1.fastq.gz'
+		file2 = bases+'_2.fastq.gz'		
+		sys.stdout.write("%s is paired end reads.\nTrimming for quality...\n" % bases)
+		if trim_double(bases, file1, file2):
+			sys.stdout.write("Trimming completed.")
+		else:
+			sys.stdout.write("Trimming failed!")
+	elif bases+'.fastq.gz' in file_list:
+		file1 = bases+'.fastq.gz'
+		sys.stdout.write("%s is single end reads.\nTrimming for quality...\n" % bases)
+		if trim_single(bases, file1):
+			sys.stdout.write("Trimming completed.")
+		else:
+			sys.stdout.write("Trimming failed!")
+	else:
+		sys.stdout.write("Check file names, non-standard, skipping %s" % bases)
+		
+		
+		
