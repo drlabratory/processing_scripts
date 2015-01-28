@@ -54,7 +54,7 @@ def trim_any(filebase):
 		os.chdir("..")
 		return True
 	else:
-		sys.stdout.write("Check file names, non-standard, skipping %s" % filebase)
+		sys.stdout.write("Check file names, non-standard, skipping %s \n" % filebase)
 		sys.stdout.flush()
 		return False
 
@@ -62,8 +62,12 @@ file_list = glob.glob('SR*gz')
 filebases = []
 
 for filenames in file_list:
-	if not filenames[:9] in filebases:
-		filebases.append(filenames[:9])
+	if '_' in filenames:
+		basename = filenames.split('_')[0]
+	else:
+		basename = filenames.split('.')[0]
+	if not basename in filebases:
+		filebases.append(basename)
 
 for bases in filebases:
 	trim_any(bases)
