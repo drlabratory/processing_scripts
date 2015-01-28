@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import ftplib, argparse
 
 if __name__ == '__main__':
@@ -9,18 +11,24 @@ if __name__ == '__main__':
     	help='a file containing ENA read accesion strings, one per line')
     args = parser.parse_args()
 
-print args
+ftp_username = "jeramiaory@kings.edu"
 
-# ftp = ftplib.FTP("ftp.sra.ebi.ac.uk")
-# ftp.login("anonymous","jeramiaory@kings.edu")
+ftp = ftplib.FTP("ftp.sra.ebi.ac.uk")
+ftp.login("anonymous",ftp_username)
 
-# file_list = open(args.file, 'rb')
-# for run_name in file_list:
-# 	print name
-
-
-# ftp.cwd("/vol1/fastq/SRR576/SRR576301")
-
-
-# for files in ftp.nlst():
-# 	ftp.retrbinary('RETR %s' % files, open(files, 'wb').write)
+file_list = open(args.file, 'rb')
+for run_name in file_list:
+	run_name = run_name.strip()
+ 	directory_sub = run_name[0:6]
+ 	if len(run_name) == 9:
+ 		ftp_cwd = "/vol1/fastq/"+directory_sub+"/"+run_name
+	elif len(run_name) == 10:
+		dir_stub = "00"+run_name[-1]
+		ftp_cwd = "/vol1/fastq/"+directory_sub+"/"+dir_stub+"/"+run_name
+	else:
+		print "A naming scheme we haven't discovered yet!"
+		sys.exit(2)
+	ftp.cwd(ftp_cwd)
+	for files in ftp.nlst():
+		print "Downloading files in %s", run_name
+		ftp.retrbinary('RETR %s' % files, open(files, 'wb').write)
