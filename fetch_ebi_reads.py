@@ -30,5 +30,5 @@ for run_name in file_list:
 		sys.exit(2)
 	ftp.cwd(ftp_cwd)
 	for files in ftp.nlst():
-		print "Downloading files in %s", run_name
+		print "Downloading files in %s" % run_name
 		ftp.retrbinary('RETR %s' % files, open(files, 'wb').write)
