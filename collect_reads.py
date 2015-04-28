@@ -17,9 +17,9 @@ for dir in trim_directories:
     new_PE2 = filebase+".PE.qc.2.fq"
     new_SE = filebase+".SE.qc.fq"
     # PE_command = "interleave-reads.py *P > %s" % new_PE
-    PE1_command = "mv *1P %s" % new_PE1
-    PE2_command = "mv *2P %s" % new_PE2
-    SE_command = "cat *U > %s" % new_SE
+    PE1_command = "mv %s %s" % (filebase+"_1P", new_PE1)
+    PE2_command = "mv %s %s" % (filebase+"_2P", new_PE2)
+    SE_command = "cat *U *_trimmed > %s" % new_SE
     os.chdir(dir)
     # subprocess.call(PE_command, shell=True)
     subprocess.call(PE1_command, shell=True)
@@ -47,16 +47,16 @@ subprocess.call(PE2_join, shell=True)
 subprocess.call(SE_join, shell=True)
 
 # Compress all fq files
-subprocess.call("pigz --best *.fq")
+subprocess.call("pigz --best *.fq", shell=True)
 
 # get rid of the original read files (not pulling the trigger on this yet)
 # also should delete *_trim directories
 
-# del_files = glob.glob("SRR*gz")
-# del_directories = glob.glob("*_trim")
+del_files = glob.glob("SRR*fastq")
+del_directories = glob.glob("*_trim")
 
-# for files in del_files:
-#     os.remove(files)
-# for directories in del_directories:
-#     shutil.rmtree(directories)
+for files in del_files:
+    os.remove(files)
+for directories in del_directories:
+    shutil.rmtree(directories)
 
