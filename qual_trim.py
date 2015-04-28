@@ -12,9 +12,9 @@ import glob
 
 def trim_any(filebase):
 	trim_directory = filebase+'_trim'
-	file_single = filebase+'.fastq.gz'
-	file_1 = bases+'_1.fastq.gz'
-	file_2 = bases+'_2.fastq.gz'	
+	file_single = filebase+'.fastq'
+	file_1 = bases+'_1.fastq'
+	file_2 = bases+'_2.fastq'	
 	single_command = ("java -Xmx14g -jar "
 		"/opt/Trimmomatic-0.33/trimmomatic-0.33.jar SE "
 		"-phred33 -threads 4 %s %s "
@@ -39,7 +39,7 @@ def trim_any(filebase):
 		os.chdir(trim_directory)
 		sys.stdout.write("%s is single end reads.\nTrimming for quality...\n" % filebase)
 		subprocess.call(single_command, shell=True)
-		sys.stdout.write("Trimming of %s completed." % filebase)
+		sys.stdout.write("Trimming of %s completed.\n" % filebase)
 		sys.stdout.flush()
 		os.chdir("..")
 		return True
@@ -49,7 +49,7 @@ def trim_any(filebase):
 		os.chdir(trim_directory)
 		sys.stdout.write("%s is double end reads.\nTrimming for quality...\n" % filebase)
 		subprocess.call(double_command, shell=True)
-		sys.stdout.write("Trimming of %s completed." % filebase)
+		sys.stdout.write("Trimming of %s completed.\n" % filebase)
 		sys.stdout.flush()
 		os.chdir("..")
 		return True
@@ -58,7 +58,7 @@ def trim_any(filebase):
 		sys.stdout.flush()
 		return False
 
-file_list = glob.glob('SR*gz')
+file_list = glob.glob('SRR*fastq')
 filebases = []
 
 for filenames in file_list:
